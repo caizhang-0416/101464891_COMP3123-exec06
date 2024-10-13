@@ -1,13 +1,20 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const notesRoutes = require('./routes/NoteRoutes'); 
 const app = express();
-const PORT = process.env.PORT || 3014; 
+const PORT = process.env.PORT || 3019;
 
-app.use(express.json()); 
-app.use('/api', notesRoutes); 
+app.use(express.json());
+app.use('/api', notesRoutes);
 
-mongoose.connect('mongodb+srv://caizhang:Woshishui1234@cluster0.gfyxn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+// Debugging output
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
+console.log('PORT:', process.env.PORT);
+
+const MONGODB_URI = process.env.MONGODB_URI;
+
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
